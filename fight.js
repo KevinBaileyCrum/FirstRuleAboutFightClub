@@ -21,16 +21,69 @@ const parseArgs = (args) => {
       return candidates
 
 
+   } else {
+      console.log('usage: node fight.js [filename]\nfile name is optional')
+      process.exit()
    }
 }
 
-   // main
-   const main = () => {
-      const candidates = parseArgs(process.argv.slice(2))
-      console.log(candidates)
+// Durstenfeld shuffle
+// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+const shuffleCandidates = (candidates) => {
+   for (let i = candidates.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
    }
+   return candidates
+}
 
-   // if __name__ == '__main__'
-   if (require.main === module) {
-      main()
+const slap = (hitter, receiver) => {
+   // console.log(`${hitter} slapping ${receiver}`)
+   receiver[1] -= hitter[2]
+}
+
+const fight = (fighters) => {
+   // randomize order for who strikes first
+   shuffleCandidates(fighters)
+   console.log('fighters')
+   console.log(fighters)
+   let turn = 0
+   while ((fighters[0][1] > 0) && (fighters[1][1] > 0)) {
+      slap(fighters[turn % 2], fighters[(turn + 1) % 2])
+      turn += 1
    }
+   if (fighters[0][1] > fighters[1][1]) {
+      return fighters[0]
+   } else {
+      return fighters[1]
+   }
+}
+
+// main
+const main = () => {
+   let candidates = parseArgs(process.argv.slice(2))
+   // console.log(candidates)
+   candidates= [  [ 'Harry Potter', 96, 16 ], [ 'Shamu', 280, 24 ]]
+   candidates.forEach(contestant => {
+      const opponents = candidates.filter(opponent => opponent != contestant)
+      // console.log('contestant')
+      // console.log(contestant)
+      // console.log('opponents')
+      // console.log(opponents)
+      opponents.forEach(opponent => {
+         console.log(contestant.slice(0))
+         console.log(opponent.slice(0))
+         console.log([contestant.slice(0), opponent.slice(0)])
+         winner = fight([contestant.slice(0), opponent.slice(0)])
+         console.log('win')
+         console.log(winner)
+         console.log('all')
+         console.log(candidates)
+      })
+   })
+}
+
+// if __name__ == '__main__'
+if (require.main === module) {
+   main()
+}
