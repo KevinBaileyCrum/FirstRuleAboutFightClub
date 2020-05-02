@@ -45,8 +45,8 @@ const slap = (hitter, receiver) => {
 const fight = (fighters) => {
    // randomize order for who strikes first
    shuffleCandidates(fighters)
-   console.log('fighters')
-   console.log(fighters)
+   // console.log('fighters')
+   // console.log(fighters)
    let turn = 0
    while ((fighters[0][1] > 0) && (fighters[1][1] > 0)) {
       slap(fighters[turn % 2], fighters[(turn + 1) % 2])
@@ -61,24 +61,28 @@ const fight = (fighters) => {
 
 // main
 const main = () => {
+   previousMatches = new Map()
    let candidates = parseArgs(process.argv.slice(2))
    // console.log(candidates)
-   candidates= [  [ 'Harry Potter', 96, 16 ], [ 'Shamu', 280, 24 ]]
+   // candidates= [  [ 'Harry Potter', 96, 16 ], [ 'Shamu', 280, 24 ]]
    candidates.forEach(contestant => {
-      const opponents = candidates.filter(opponent => opponent != contestant)
-      // console.log('contestant')
       // console.log(contestant)
-      // console.log('opponents')
-      // console.log(opponents)
+      const opponents = candidates.filter(opponent => candidates.indexOf(opponent) > candidates.indexOf(contestant))
+      console.log('contestant')
+      console.log(contestant)
+      console.log('opponents')
+      console.log(opponents)
       opponents.forEach(opponent => {
-         console.log(contestant.slice(0))
-         console.log(opponent.slice(0))
-         console.log([contestant.slice(0), opponent.slice(0)])
+         // check for duplicate match
+         // if (previousMatches.get(opponent) {
+            // return
+         // }
+         // else {
          winner = fight([contestant.slice(0), opponent.slice(0)])
-         console.log('win')
-         console.log(winner)
-         console.log('all')
-         console.log(candidates)
+         // console.log('win')
+         // console.log(winner)
+         // console.log('all')
+         // console.log(candidates)
       })
    })
 }
