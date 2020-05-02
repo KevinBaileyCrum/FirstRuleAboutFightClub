@@ -98,6 +98,7 @@ const main = () => {
       }
    })
    console.log(winnerMap)
+   const sortedFighters = winnerMap.sort((a, b) => (b.wins - a.wins))
 }
 
 // if __name__ == '__main__'
