@@ -10,14 +10,16 @@ const candidates = [
 ["Harry Potter",96,16],
 ["Shamu",280,24],
 ["Bill Gates",124,6],
-];
+]
 
 // main
 const main = () => {
+   const myArgs = process.argv.slice(2)
+   console.log('myArgs: ', myArgs)
    return candidates
 }
 
 // if __name__ == '__main__'
 if (require.main === module) {
-   main();
+   main()
 }
