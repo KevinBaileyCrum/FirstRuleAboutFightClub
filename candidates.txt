@@ -1,4 +1,4 @@
 [
-   [ 'Tom Cruise', 136, 6 ],
-   [ 'Shamu', 280, 24 ]
+   [ "Tom Cruise", 136, 6 ],
+   [ "Shamu", 280, 24 ]
 ]
