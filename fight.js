@@ -38,15 +38,12 @@ const shuffleCandidates = (candidates) => {
 }
 
 const slap = (hitter, receiver) => {
-   // console.log(`${hitter} slapping ${receiver}`)
    receiver[1] -= hitter[2]
 }
 
 const fight = (fighters) => {
    // randomize order for who strikes first
    shuffleCandidates(fighters)
-   // console.log('fighters')
-   // console.log(fighters)
    let turn = 0
    while ((fighters[0][1] > 0) && (fighters[1][1] > 0)) {
       slap(fighters[turn % 2], fighters[(turn + 1) % 2])
@@ -63,42 +60,33 @@ const fight = (fighters) => {
 const main = () => {
    let winnerMap = new Map()
    let candidates = parseArgs(process.argv.slice(2))
-   // console.log(candidates)
-   // candidates= [  [ 'Harry Potter', 96, 16 ], [ 'Shamu', 280, 24 ]]
    candidates.forEach(contestant => {
-      // console.log(contestant)
       const opponents = candidates.filter(opponent => candidates.indexOf(opponent) > candidates.indexOf(contestant))
-      console.log('contestant')
-      console.log(contestant)
-      console.log('opponents')
-      console.log(opponents)
       if (opponents.length > 0) {
          opponents.forEach(opponent => {
-            console.log(winnerMap)
             winner = fight([contestant.slice(0), opponent.slice(0)])
             if (winner[0] === contestant[0]) {
-               if (winnerMap.has(contestant)) {
-                  winnerMap.get(contestant).wins++
+               if (winnerMap.has(contestant[0])) {
+                  winnerMap.get(contestant[0]).wins++
                } else {
-                  winnerMap.set(contestant, {wins: 1})
+                  winnerMap.set(contestant[0], {wins: 1})
                }
             } else {
-               if (winnerMap.has(opponent)) {
-                  winnerMap.get(opponent).wins++
+               if (winnerMap.has(opponent[0])) {
+                  winnerMap.get(opponent[0]).wins++
                } else {
-                  winnerMap.set(opponent, {wins: 1})
+                  winnerMap.set(opponent[0], {wins: 1})
                }
             }
 
-            console.log('win')
-            console.log(winner)
-            // console.log('all')
-            // console.log(candidates)
          })
       }
    })
-   console.log(winnerMap)
-   const sortedFighters = winnerMap.sort((a, b) => (b.wins - a.wins))
+   mapAsArray = Array.from(winnerMap)
+   sortedWinners = mapAsArray.sort((a, b) => {
+      return b[1].wins - a[1].wins
+   })
+   console.log(sortedWinners)
 }
 
 // if __name__ == '__main__'
