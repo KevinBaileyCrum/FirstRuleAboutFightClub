@@ -9,20 +9,9 @@ Don't Talk About Robin
 ## Usage
 * `git clone https://github.com/KevinBaileyCrum/FirstRuleAboutFightClub/`
 * `cd FirstRuleAboutFightClub`
-* `node fight.js [filename]`
-* `[filename]` is an optional argument if you would like to include a different set of candidates.  Otherwise the default candidates:
-```
-const candidates = [
-["Name","Health","Damage"],
-["Tom Cruise",136,6],
-["Sponge Bob",110,4],
-["James Earl Jones",175,8],
-["Bob Barker",112,2],
-["Tonya Harding",108,7],
-["Charles Barkley",220,12],
-["Peter Piper",116,4],
-["Harry Potter",96,16],
-["Shamu",280,24],
-["Bill Gates",124,6],
-];
-```
+* `node fight.js`
+
+## After Thoughts
+* Very fun assessment, I laughed quite a bit reading it
+* More than meets the eye. At first glance I thought it was going to be a really simple task however little javascriptisms such as passing by value (`slice()`) vs passing by reference created some speed bumps. 
+* All and all a super positive experience 
